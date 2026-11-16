@@ -1,0 +1,200 @@
+.go-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.go-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.go-title-wrap {
+  margin-top: clamp(0.5rem, 3vh, 2rem);
+}
+
+.go-title {
+  margin: 0;
+  padding: 0.12em 0.45em 0.3em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, min(8vw, 12vh), 6rem);
+  line-height: 1.2;
+  white-space: nowrap; /* que no se parta en dos líneas */
+  background: linear-gradient(180deg, #ffe0f0 0%, #ff63ae 55%, #ff2a8a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 14px rgba(255, 40, 150, 0.75));
+}
+
+.go-name {
+  margin: 0.2rem 0 0;
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ff7ab8;
+}
+
+.go-label {
+  margin: clamp(0.4rem, 2vh, 1.4rem) 0 0;
+  font-size: clamp(1.1rem, 2.6vw, 2rem);
+  font-weight: 400;
+}
+
+.go-score {
+  margin: 0;
+  font-size: clamp(3rem, min(9vw, 12vh), 6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+/* Caja del mejor puntaje */
+.go-best {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  width: min(88vw, 22.8rem);
+  margin-top: clamp(0.5rem, 1.6vh, 1.2rem);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--magenta);
+  border-radius: 1rem;
+  background: var(--glass);
+  backdrop-filter: blur(4px);
+}
+
+.go-best span {
+  font-size: clamp(0.9rem, 1.4vw, 1.15rem);
+  font-weight: 700;
+  color: var(--pink);
+}
+
+.go-best strong {
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 800;
+}
+
+.go-record {
+  margin: 0.6rem 0 0;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #ffd0e6;
+  animation: go-pulse 1s ease-in-out infinite;
+}
+
+.go-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.7rem, 2vh, 1.4rem);
+  margin-top: clamp(1.1rem, 3vh, 2rem);
+}
+
+/* ---------- Ranking (debajo del mejor puntaje) ---------- */
+.ranking {
+  width: min(88vw, 22.8rem);
+  margin-top: clamp(0.5rem, 1.6vh, 1.1rem);
+  padding: 0.55rem 0.8rem 0.65rem;
+  border: 1px solid var(--magenta);
+  border-radius: 1rem;
+  background: rgba(40, 5, 40, 0.6);
+  backdrop-filter: blur(4px);
+  text-align: left;
+}
+
+.ranking-title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--pink);
+}
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ranking-row {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.22rem 0.6rem;
+  border-radius: 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: clamp(0.8rem, 1.05vw, 0.95rem);
+}
+
+.ranking-row .pos {
+  font-weight: 800;
+  color: #ff7ab8;
+}
+
+.ranking-row .name {
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ranking-row .pts {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ranking-row.you {
+  background: var(--pink);
+  box-shadow: 0 0 14px rgba(255, 34, 114, 0.6);
+}
+
+.ranking-row.you .pos,
+.ranking-row.you .pts {
+  color: #fff;
+}
+
+.ranking-gap {
+  line-height: 0.8;
+  text-align: center;
+  letter-spacing: 0.3em;
+  color: #ff7ab8;
+}
+
+/* Logo del pie más discreto en esta pantalla */
+.gameover .footer {
+  padding-bottom: 0.8rem;
+}
+
+.gameover .footer-logo {
+  width: clamp(2.6rem, 4vw, 3.4rem);
+}
+
+/* Ventanas bajas: el ranking muestra el top 3 (y tu fila) para que los botones queden a la vista */
+@media (max-height: 960px) {
+  .ranking-row:nth-child(n + 4):not(.you) {
+    display: none;
+  }
+}
+
+@keyframes go-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .go-record {
+    animation: none;
+  }
+}

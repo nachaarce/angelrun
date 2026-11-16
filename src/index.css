@@ -1,0 +1,288 @@
+:root {
+  --pink: #ff2272;
+  --magenta: #d400a8;
+  --magenta-text: #c0158f;
+  --glass: rgba(120, 20, 90, 0.35);
+  --wine: #9a1445;
+  --icon: #ff2a7a;
+  --font-display: "Great Vibes", cursive;
+  --font-brand: "Cormorant Garamond", Georgia, serif;
+  --font-ui: "Inter", system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: #0a0010;
+  color: #fff;
+  font-family: var(--font-ui);
+}
+
+/* ---------- Pantalla con fondo de pasarela ---------- */
+.screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: #0a0010 url("./assets/fondo-vs.png") center / cover no-repeat;
+  overflow: hidden;
+}
+
+.screen-placeholder {
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* ---------- Header ---------- */
+.header {
+  position: relative;
+  padding: clamp(1rem, 4vh, 3.5rem) 1rem 0;
+  text-align: center;
+}
+
+.brand {
+  margin: 0;
+  font-family: var(--font-brand);
+  font-weight: 500;
+  font-variant-caps: small-caps;
+  font-size: clamp(1.5rem, 3.2vw, 2.6rem);
+  letter-spacing: 0.06em;
+}
+
+.sound-controls {
+  position: absolute;
+  top: clamp(0.75rem, 2vh, 1.5rem);
+  right: clamp(0.75rem, 2vw, 2rem);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--icon);
+  cursor: pointer;
+}
+
+.icon-btn svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* ---------- Contenido principal ---------- */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.title {
+  margin: clamp(0.25rem, 1.5vh, 1.5rem) 0 0;
+  padding: 0 0.2em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(4rem, min(13vw, 21vh), 10rem);
+  line-height: 1.1;
+  background: linear-gradient(180deg, #ffe0f0 0%, #ff63ae 55%, #ff2a8a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 14px rgba(255, 40, 150, 0.75));
+}
+
+.tagline {
+  margin: clamp(0.5rem, 2vh, 2.5rem) 0 0;
+  font-size: clamp(0.9rem, 1.7vw, 1.4rem);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.actions {
+  margin-top: clamp(1.25rem, 5vh, 5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.8rem, 2.5vh, 2.2rem);
+  width: 100%;
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  height: clamp(3.75rem, 10.5vh, 6.9rem);
+  border-radius: clamp(0.8rem, 1.4vw, 1.1rem);
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:focus-visible,
+.icon-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Rosa grande: JUGAR */
+.btn-primary {
+  width: min(88vw, 25.3rem);
+  border: 1px solid var(--magenta);
+  background: var(--pink);
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  padding-left: 0.3em;
+  box-shadow: 0 6px 24px rgba(255, 34, 114, 0.45),
+    inset 0 2px 6px rgba(255, 255, 255, 0.25);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 32px rgba(255, 34, 114, 0.7),
+    inset 0 2px 6px rgba(255, 255, 255, 0.25);
+}
+
+/* Translúcido: CÓMO JUGAR y VOLVER */
+.btn-secondary {
+  width: min(80vw, 22.8rem);
+  border: 1px solid var(--magenta);
+  background: var(--glass);
+  color: var(--magenta-text);
+  font-size: clamp(1.3rem, 2.4vw, 2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
+}
+
+.btn-secondary:hover {
+  background: rgba(150, 25, 110, 0.5);
+}
+
+/* Rosa mediano: ¡A JUGAR! */
+.btn-cta {
+  width: min(80vw, 22rem);
+  height: clamp(3rem, 6.8vh, 4.4rem);
+  border: 1px solid var(--magenta);
+  background: var(--pink);
+  color: #fff;
+  font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+  font-weight: 800;
+  box-shadow: 0 6px 24px rgba(255, 34, 114, 0.45),
+    inset 0 2px 6px rgba(255, 255, 255, 0.25);
+}
+
+.btn-cta:hover {
+  box-shadow: 0 8px 32px rgba(255, 34, 114, 0.7),
+    inset 0 2px 6px rgba(255, 255, 255, 0.25);
+}
+
+/* Versión compacta (VOLVER en la pantalla de nombre) */
+.btn.btn-sm {
+  width: min(70vw, 18rem);
+  height: clamp(2.8rem, 6.2vh, 4rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+}
+
+/* ---------- Pantalla de nombre ---------- */
+.name-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 4.5vh, 2.6rem);
+  width: 100%;
+}
+
+.name-input {
+  width: min(88vw, 25.3rem);
+  height: clamp(3.75rem, 10.5vh, 6.9rem);
+  border: 1px solid var(--magenta);
+  border-radius: clamp(0.8rem, 1.4vw, 1.1rem);
+  background: var(--wine);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: clamp(1.8rem, 3.6vw, 3.1rem);
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.12);
+}
+
+.name-input::placeholder {
+  color: #fff;
+  opacity: 0.95;
+}
+
+.name-input:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Botón con alas a los costados */
+.cta-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.wing {
+  position: absolute;
+  top: -1.5rem;
+  width: clamp(2.4rem, 3.6vw, 3.4rem);
+  height: auto;
+  pointer-events: none;
+    z-index: 1;
+}
+
+.wing-left {
+  left: -2.2rem;
+}
+
+.wing-right {
+  right: -2.2rem;
+  transform: scaleX(-1);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem clamp(1rem, 4vh, 4rem);
+}
+
+.footer-logo {
+  display: block;
+  width: clamp(3rem, 6vw, 4.5rem);
+  height: auto;
+  opacity: 0.65;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}

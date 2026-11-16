@@ -1,0 +1,398 @@
+/* ---------- Pantalla de juego ---------- */
+.game-screen {
+  background: radial-gradient(ellipse at 50% 40%, #5a1248 0%, #3d0b33 60%, #260620 100%);
+  padding: clamp(0.6rem, 2vh, 1.4rem) clamp(0.8rem, 3vw, 3rem);
+  gap: clamp(0.5rem, 1.5vh, 1rem);
+}
+
+/* HUD de arriba */
+.topbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stat {
+  margin: 0;
+  font-size: clamp(1rem, 2.3vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.stat span {
+  color: var(--pink);
+  margin-right: 0.3em;
+}
+
+.stat:nth-child(2) {
+  text-align: center;
+}
+
+.stat:nth-child(3) {
+  text-align: right;
+}
+
+.topbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.topbar .sound-controls {
+  position: static;
+}
+
+.pause-btn {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.pause-btn i {
+  width: 0.4rem;
+  height: 1.5rem;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #ffd0e6, var(--pink));
+}
+
+.pause-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ---------- Laberinto ---------- */
+.maze-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.stage {
+  position: relative;
+  width: min(100%, calc((100dvh - 12rem) * var(--cols) / var(--rows)));
+}
+
+.maze {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--cols) / var(--rows);
+  border: 4px solid var(--pink);
+  border-radius: 10px;
+  background: #4a1040;
+  box-shadow: 0 0 22px rgba(255, 34, 114, 0.35);
+}
+
+.wall,
+.item,
+.entity,
+.runway,
+.logo-box {
+  position: absolute;
+}
+
+.wall {
+  box-sizing: border-box;
+  background: #4a1040;
+  border: 0 solid var(--pink);
+  box-shadow: 0 0 0 0.6px #4a1040; /* tapa las rayitas entre casillas */
+}
+.wall.t { border-top-width: 3px; }
+.wall.r { border-right-width: 3px; }
+.wall.b { border-bottom-width: 3px; }
+.wall.l { border-left-width: 3px; }
+.wall.t.l { border-top-left-radius: 10px; }
+.wall.t.r { border-top-right-radius: 10px; }
+.wall.b.l { border-bottom-left-radius: 10px; }
+.wall.b.r { border-bottom-right-radius: 10px; }
+
+.logo-box {
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.logo-box span {
+  font-family: var(--font-brand);
+  font-weight: 600;
+  font-size: clamp(2rem, 6vw, 5rem);
+  color: rgba(205, 165, 205, 0.6);
+}
+
+/* Corazoncitos, corazones y piezas */
+.item {
+  display: grid;
+  place-items: center;
+}
+
+.item-dot::after {
+  content: "";
+  width: 28%;
+  height: 28%;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.item svg {
+  width: 92%;
+  height: 92%;
+}
+
+.item-piece svg {
+  animation: bounce 0.9s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(255, 90, 170, 0.9));
+}
+
+/* Pasarela (la salida): se ilumina con el look completo */
+.runway {
+  display: grid;
+  place-items: center;
+}
+
+.runway span {
+  width: 120%;
+  height: 120%;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.7), rgba(255, 34, 114, 0.3) 70%);
+  box-shadow: 0 0 16px 4px rgba(255, 34, 114, 0.9);
+  animation: pulse 0.8s ease-in-out infinite;
+}
+
+/* Angel y fantasmas se deslizan de casilla en casilla */
+.entity {
+  transition: left 0.15s linear, top 0.15s linear;
+  z-index: 2;
+}
+
+.entity-ghost svg {
+  position: absolute;
+  inset: 8%;
+  width: 84%;
+  height: 84%;
+}
+
+.entity-angel {
+  z-index: 3;
+}
+
+/* Las alas son más anchas que la casilla */
+.entity-angel svg {
+  position: absolute;
+  width: 200%;
+  left: -50%;
+  top: -20%;
+  filter: drop-shadow(0 0 6px rgba(255, 60, 150, 0.8));
+}
+
+.entity-angel.fast svg {
+  filter: drop-shadow(0 0 10px #fff);
+}
+
+.entity-ghost.blink {
+  animation: blink 0.3s steps(2) infinite;
+}
+
+/* ---------- Mensajes ---------- */
+.toast {
+  position: absolute;
+  top: 0.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  margin: 0;
+  padding: 0.35rem 1.1rem;
+  border: 1px solid var(--magenta);
+  border-radius: 999px;
+  background: rgba(120, 20, 90, 0.85);
+  font-weight: 700;
+  font-size: clamp(0.85rem, 1.6vw, 1.2rem);
+  white-space: nowrap;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  text-align: center;
+  background: rgba(25, 4, 24, 0.78);
+}
+
+.overlay h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  line-height: 1.1;
+  background: linear-gradient(180deg, #ffe0f0 0%, #ff63ae 55%, #ff2a8a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 12px rgba(255, 40, 150, 0.7));
+  padding: 0 0.2em;
+}
+
+.overlay p {
+  max-width: 34rem;
+  margin: 0;
+  font-size: clamp(0.95rem, 1.6vw, 1.3rem);
+  line-height: 1.4;
+}
+
+.overlay .hint {
+  color: #ff7ab8;
+  font-weight: 700;
+  animation: pulse-text 1s ease-in-out infinite;
+}
+
+/* ---------- HUD de abajo ---------- */
+.bottombar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bottombar b {
+  font-size: clamp(0.85rem, 1.8vw, 1.4rem);
+  font-weight: 700;
+}
+
+.lives {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.lives b {
+  margin-left: 0.4rem;
+}
+
+.star {
+  width: clamp(1.4rem, 2.6vw, 2.2rem);
+  color: #6e1a52;
+}
+
+.star.on {
+  color: #c2185b;
+}
+
+.look {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.look b {
+  margin-right: 0.3rem;
+  color: var(--pink);
+}
+
+.slot {
+  display: grid;
+  place-items: center;
+  width: clamp(2rem, 3.6vw, 3rem);
+  height: clamp(2rem, 3.6vw, 3rem);
+  padding: 0.3rem;
+  border: 2px solid #6e1a52;
+  border-radius: 0.7rem;
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+
+.slot svg {
+  width: 100%;
+  height: 100%;
+}
+
+.slot.on {
+  border-color: var(--pink);
+  background: rgba(255, 34, 114, 0.18);
+  opacity: 1;
+  filter: none;
+}
+
+.pinkbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.pink-wing {
+  width: 1.8rem;
+  flex: none;
+}
+
+.pink-track {
+  flex: 1;
+  max-width: 17rem;
+  height: 1.1rem;
+  border-radius: 999px;
+  background: #d9d2d6;
+  overflow: hidden;
+}
+
+.pink-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--pink);
+  transition: width 0.15s linear;
+}
+
+.pinkbar b {
+  white-space: nowrap;
+}
+
+/* ---------- Animaciones ---------- */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8%); }
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(0.8); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+@keyframes pulse-text {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+@keyframes blink {
+  50% { opacity: 0.35; }
+}
+
+@media (max-width: 800px) {
+  .bottombar {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .stage {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item-piece svg,
+  .runway span,
+  .overlay .hint,
+  .entity-ghost.blink {
+    animation: none;
+  }
+}

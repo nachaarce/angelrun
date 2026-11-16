@@ -1,0 +1,236 @@
+.howto {
+  position: relative;
+  background: radial-gradient(ellipse at 50% 35%, #5a1248 0%, #3d0b33 55%, #260620 100%);
+}
+
+.howto-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 clamp(1rem, 3vw, 2.5rem) clamp(1.2rem, 3vh, 2.5rem);
+  text-align: center;
+}
+
+.howto-title {
+  margin: 0.25rem 0 0;
+  padding: 0 0.2em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, min(7vw, 11vh), 5.6rem);
+  line-height: 1.15;
+  background: linear-gradient(180deg, #ffe0f0 0%, #ff63ae 55%, #ff2a8a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 14px rgba(255, 40, 150, 0.75));
+}
+
+.howto-intro {
+  max-width: 48rem;
+  margin: 0.4rem 0 0;
+  font-size: clamp(0.9rem, 1.4vw, 1.2rem);
+  line-height: 1.4;
+}
+
+.howto strong {
+  color: #ff7ab8;
+  font-weight: 700;
+}
+
+/* ---------- Tarjetas ---------- */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.6vw, 1.4rem);
+  width: 100%;
+  max-width: 1300px;
+  margin-top: clamp(0.6rem, 2vh, 1.6rem);
+}
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: clamp(8.5rem, 22vh, 14rem);
+  padding: 1rem 0.8rem;
+  border: 1px solid var(--magenta);
+  border-radius: 1.4rem;
+  background: rgba(110, 22, 86, 0.55);
+}
+
+.info-card-icon {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: clamp(3rem, 9vh, 5.5rem);
+}
+
+.info-card-icon svg {
+  max-width: 100%;
+  height: 100%;
+}
+
+.info-card-title {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.3vw, 2rem);
+  color: #ffd0e6;
+}
+
+.info-card-text {
+  margin: 0;
+  font-size: clamp(0.78rem, 1.05vw, 0.98rem);
+  line-height: 1.3;
+}
+
+/* ---------- Poderes del look ---------- */
+.powers {
+  width: 100%;
+  max-width: 1300px;
+  margin-top: clamp(0.8rem, 2.5vh, 1.6rem);
+}
+
+.powers-title {
+  margin: 0 0 0.6rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--pink);
+}
+
+.powers-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1.4vw, 1.2rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.power {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--magenta);
+  border-radius: 1rem;
+  background: rgba(110, 22, 86, 0.4);
+  text-align: left;
+}
+
+.power-icon {
+  flex: none;
+  width: clamp(2rem, 3.6vw, 3rem);
+  height: clamp(2rem, 3.6vw, 3rem);
+}
+
+.power-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.power-text {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  line-height: 1.25;
+}
+
+.power-text b {
+  color: #ffd0e6;
+  font-weight: 700;
+}
+
+/* ---------- Controles ---------- */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.2rem);
+  margin-top: clamp(0.8rem, 2.5vh, 1.6rem);
+  text-align: left;
+}
+
+.arrow-keys {
+  display: grid;
+  grid-template-columns: repeat(3, clamp(2.3rem, 3.4vw, 3.2rem));
+  grid-template-rows: repeat(2, clamp(2.3rem, 3.4vw, 3.2rem));
+  gap: 0.3rem;
+}
+
+.key {
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--pink);
+  border-radius: 0.7rem;
+  color: var(--pink);
+}
+
+.key svg {
+  width: 55%;
+  height: 55%;
+}
+
+.key-up { grid-column: 2; grid-row: 1; }
+.key-left { grid-column: 1; grid-row: 2; }
+.key-down { grid-column: 2; grid-row: 2; }
+.key-right { grid-column: 3; grid-row: 2; }
+
+.controls-text h2 {
+  margin: 0 0 0.3rem;
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  font-weight: 800;
+  color: var(--pink);
+}
+
+.controls-text p {
+  max-width: 17rem;
+  margin: 0;
+  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  line-height: 1.3;
+}
+
+/* ---------- Botón y enlace ---------- */
+.howto .cta-wrap {
+  margin-top: clamp(1.4rem, 3.5vh, 2.4rem);
+}
+
+.back-link {
+  position: absolute;
+  left: clamp(1rem, 4vw, 3.5rem);
+  bottom: clamp(1rem, 3vh, 2rem);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #d9b3d0;
+  font: 500 1rem var(--font-ui);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.back-link:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ---------- Pantallas chicas ---------- */
+@media (max-width: 900px) {
+  .info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .info-card {
+    min-height: 10rem;
+  }
+  .powers-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .back-link {
+    position: static;
+    margin: 1rem 0 0 1rem;
+    align-self: flex-start;
+  }
+}
